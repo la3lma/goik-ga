@@ -23,15 +23,15 @@ type Rotor struct {
 
 type Vec3 = pga.Vec3
 
-func Identity() Rotor { return Rotor{M: pga.Identity()} }
+func Identity() Rotor                           { return Rotor{M: pga.Identity()} }
 func FromAxisAngle(u Vec3, theta float64) Rotor { return Rotor{M: pga.FromAxisAngle(u, theta)} }
-func Translator(t Vec3) Rotor { return Rotor{M: pga.Translator(t)} }
+func Translator(t Vec3) Rotor                   { return Rotor{M: pga.Translator(t)} }
 func Screw(p Vec3, u Vec3, theta float64, pitch float64) Rotor {
 	return Rotor{M: pga.Screw(p, u, theta, pitch)}
 }
 
 func (a Rotor) Mul(b Rotor) Rotor { return Rotor{M: a.M.Mul(b.M)} }
-func (a Rotor) Inv() Rotor       { return Rotor{M: a.M.Inv()} }
+func (a Rotor) Inv() Rotor        { return Rotor{M: a.M.Inv()} }
 
 func (a Rotor) ActPoint(p Vec3) Vec3 { return a.M.ActPoint(p) }
 func (a Rotor) ActDir(v Vec3) Vec3   { return a.M.ActDir(v) }
