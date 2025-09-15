@@ -7,8 +7,8 @@ type Vec3 struct{ X, Y, Z float64 }
 
 func V(x, y, z float64) Vec3 { return Vec3{x, y, z} }
 
-func (a Vec3) Add(b Vec3) Vec3 { return Vec3{a.X + b.X, a.Y + b.Y, a.Z + b.Z} }
-func (a Vec3) Sub(b Vec3) Vec3 { return Vec3{a.X - b.X, a.Y - b.Y, a.Z - b.Z} }
+func (a Vec3) Add(b Vec3) Vec3      { return Vec3{a.X + b.X, a.Y + b.Y, a.Z + b.Z} }
+func (a Vec3) Sub(b Vec3) Vec3      { return Vec3{a.X - b.X, a.Y - b.Y, a.Z - b.Z} }
 func (a Vec3) Scale(s float64) Vec3 { return Vec3{s * a.X, s * a.Y, s * a.Z} }
 
 func (a Vec3) Dot(b Vec3) float64 { return a.X*b.X + a.Y*b.Y + a.Z*b.Z }
