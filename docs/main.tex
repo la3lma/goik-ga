@@ -8,7 +8,16 @@
 \usepackage{subcaption}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{caption}
 \geometry{margin=1in}
+
+% Caption styling configuration
+\captionsetup{
+    font={small,it},        % Small, italic font for captions
+    labelfont=bf,           % Bold label (Figure 1:)
+    labelsep=period,        % Period after label
+    justification=centering % Center captions
+}
 
 % Code listing setup
 \lstset{
@@ -123,7 +132,7 @@ This matches the PGA motor action for SE(3) rigid body motions.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{illustrations/motor_composition.png}
+    \includegraphics[width=0.3\textwidth]{illustrations/motor_composition.png}
     \caption{Motor composition workflow showing the associative nature of geometric transformations. Each motor represents a screw motion (combined rotation and translation), and their composition naturally represents the complete kinematic chain.}
     \label{fig:motor_composition}
 \end{figure}
