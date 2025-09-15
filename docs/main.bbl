@@ -1,12 +1,18 @@
 \begin{thebibliography}{1}
 
-\bibitem{gunn2011pga}
-C.~Gunn, ``On the homogeneous model of euclidean geometry,'' 2011.
-\newblock PGA overview and applications.
-
 \bibitem{dorst2009gacs}
-L.~Dorst, D.~Fontijne, and S.~Mann, {\em Geometric Algebra for Computer
-  Science: An Object-Oriented Approach to Geometry}.
+Leo Dorst, Daniel Fontijne, and Stephen Mann.
+\newblock {\em Geometric Algebra for Computer Science: An Object-Oriented
+  Approach to Geometry}.
 \newblock Morgan Kaufmann, 2009.
+\newblock Available on Amazon:
+  \url{https://www.amazon.com/Geometric-Algebra-Computer-Science-Object-Oriented/dp/0123749425}.
+
+\bibitem{gunn2011pga}
+Charles Gunn.
+\newblock On the homogeneous model of euclidean geometry.
+\newblock arXiv preprint arXiv:1101.4542, 2011.
+\newblock PGA overview and applications. Available at:
+  \url{https://arxiv.org/abs/1101.4542}.
 
 \end{thebibliography}

@@ -1,5 +1,2 @@
-*.aux
 *.bbl
 *.blg
-*.out
-.venv/
