@@ -25,7 +25,7 @@ EXAMPLE_BINARY=$(EXAMPLE_DIR)/hexapod_leg
 PACKAGES=./pga ./cga
 ALL_PACKAGES=./...
 
-.PHONY: all build test clean fmt vet tidy deps example doc pdf help
+.PHONY: all build test clean fmt vet tidy deps example doc pdf help illustrations clean-doc clean-latex
 
 # Default target
 all: build test example pdf
@@ -70,38 +70,46 @@ deps:
 	@echo "Downloading dependencies..."
 	$(GOMOD) download
 
-# Build documentation PDF
+# Build documentation PDF (delegate to docs/Makefile)
 pdf: $(DOCS_OUTPUT)
 
 $(DOCS_OUTPUT): $(DOCS_SOURCE) $(DOCS_DIR)/refs.bib
-	@echo "Building LaTeX documentation..."
-	cd $(DOCS_DIR) && $(LATEX) main.tex
-	cd $(DOCS_DIR) && $(BIBTEX) main
-	cd $(DOCS_DIR) && $(LATEX) main.tex
-	cd $(DOCS_DIR) && $(LATEX) main.tex
+	@echo "Building documentation (delegating to docs/Makefile)..."
+	cd $(DOCS_DIR) && $(MAKE) pdf
 	@echo "Documentation built: $(DOCS_OUTPUT)"
 
 # Alias for documentation
 doc: pdf
+
+# Generate documentation illustrations
+illustrations:
+	@echo "Generating documentation illustrations..."
+	cd $(DOCS_DIR) && $(MAKE) illustrations
+
+# Clean documentation files
+clean-doc:
+	@echo "Cleaning documentation files..."
+	cd $(DOCS_DIR) && $(MAKE) clean
 
 # Clean build artifacts
 clean:
 	@echo "Cleaning build artifacts..."
 	$(GOCLEAN) $(ALL_PACKAGES)
 	rm -f $(EXAMPLE_BINARY)
-	cd $(DOCS_DIR) && rm -f *.aux *.bbl *.blg *.log *.out *.toc *.pdf
+	cd $(DOCS_DIR) && $(MAKE) clean
 
 # Clean LaTeX intermediate files only
 clean-latex:
 	@echo "Cleaning LaTeX intermediate files..."
-	cd $(DOCS_DIR) && rm -f *.aux *.bbl *.blg *.log *.out *.toc
+	cd $(DOCS_DIR) && $(MAKE) clean-latex
 
 # Check for required tools
 check-tools:
 	@echo "Checking for required tools..."
 	@which $(GOCMD) > /dev/null || (echo "Go is not installed or not in PATH" && exit 1)
-	@which $(LATEX) > /dev/null || (echo "pdflatex is not installed or not in PATH" && exit 1)
-	@which $(BIBTEX) > /dev/null || (echo "bibtex is not installed or not in PATH" && exit 1)
+	@echo "Go tools are available"
+	@echo "Checking documentation tools..."
+	cd $(DOCS_DIR) && $(MAKE) check-tools
 	@echo "All required tools are available"
 
 # Development workflow
@@ -133,6 +141,8 @@ help:
 	@echo "  example      - Build hexapod leg example"
 	@echo "  run-example  - Build and run hexapod leg example"
 	@echo "  pdf/doc      - Build LaTeX documentation PDF"
+	@echo "  illustrations - Generate documentation illustrations"
+	@echo "  clean-doc    - Clean documentation files"
 	@echo "  fmt          - Format Go code"
 	@echo "  vet          - Run go vet"
 	@echo "  tidy         - Tidy go modules"

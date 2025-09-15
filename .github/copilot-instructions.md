@@ -66,9 +66,49 @@ sudo apt-get update && sudo apt-get install -y texlive-latex-base texlive-latex-
 # Note: May show bibtex warning about no citations - this is expected
 make pdf
 
+# Generate illustrations separately
+make illustrations
+
 # Clean LaTeX intermediate files only
 make clean-latex
 ```
+
+### Documentation Illustration Guidelines
+
+When generating documentation illustrations, follow these established patterns:
+
+#### PlantUML Diagrams
+- Store PlantUML source files in `docs/plantuml/` directory
+- Use `.puml` extension for source files  
+- Generated PNG files are automatically placed in `docs/illustrations/`
+- Keep diagrams simple and compatible with older PlantUML versions
+- Focus on structural and workflow diagrams
+- Examples: `hexapod_leg_structure.puml`, `motor_composition.puml`, `coordinate_frames.puml`
+
+#### Python-Generated Figures  
+- Store Python scripts in `docs/python/` directory
+- Use descriptive names like `leg_configuration.py`, `jacobian_visualization.py`
+- Scripts should generate PNG files with suffix `-py.png`
+- Generated files are automatically moved to `docs/illustrations/`
+- Use matplotlib with the following standard imports:
+  ```python
+  import numpy as np
+  import matplotlib.pyplot as plt
+  from mpl_toolkits.mplot3d import Axes3D
+  ```
+- Save with high DPI: `plt.savefig('filename-py.png', dpi=300, bbox_inches='tight')`
+
+#### Build Infrastructure
+- Use `make illustrations` to generate all diagrams and figures
+- Use `make plantuml-figures` for PlantUML diagrams only
+- Use `make python-figures` for Python-generated figures only
+- Python virtual environment is automatically created in `docs/.venv/`
+- Virtual environment includes: matplotlib, numpy, scipy, Pillow
+
+#### LaTeX Integration
+- Reference illustrations using: `\includegraphics[width=0.8\textwidth]{illustrations/filename.png}`
+- Use `figure` environment with captions for proper layout
+- All illustration generation is triggered automatically when building documentation
 
 ## Validation
 

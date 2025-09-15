@@ -1,0 +1,16 @@
+@startuml motor_composition
+title Motor Composition for Forward Kinematics
+
+[Identity Motor] --> [M1: Hip Yaw] : Mul()
+[M1: Hip Yaw] --> [M2: Thigh Pitch] : Mul()
+[M2: Thigh Pitch] --> [M3: Knee Pitch] : Mul()
+[M3: Knee Pitch] --> [T: Translation] : Mul()
+[T: Translation] --> [Toe Position] : ActPoint()
+
+note bottom
+Motor Composition:
+M = Identity * M1 * M2 * M3 * T
+Final_Point = M.ActPoint(Initial_Point)
+end note
+
+@enduml

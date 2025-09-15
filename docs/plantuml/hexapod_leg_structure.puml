@@ -1,0 +1,33 @@
+@startuml hexapod_leg_structure
+title Hexapod Leg Structure: 3-DOF Configuration
+
+[Hip Joint] as Hip
+[Thigh Joint] as Thigh  
+[Knee Joint] as Knee
+[Toe Point] as Toe
+
+Hip --> Thigh : Motor M1\n(Hip Yaw, Z-axis)
+Thigh --> Knee : Motor M2\n(Thigh Pitch, Y-axis)
+Knee --> Toe : Motor M3\n(Knee Pitch, Y-axis)
+
+note left of Hip
+θ1 = 20° (yaw)
+About Z-axis
+end note
+
+note left of Thigh
+θ2 = -10° (pitch)
+About Y-axis
+end note
+
+note left of Knee
+θ3 = 30° (pitch)
+About Y-axis
+end note
+
+note bottom of Toe
+Resulting Toe Position:
+X: 0.188m, Y: 0.068m, Z: 0.052m
+end note
+
+@enduml
