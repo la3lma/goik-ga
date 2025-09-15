@@ -110,6 +110,50 @@ When generating documentation illustrations, follow these established patterns:
 - Use `figure` environment with captions for proper layout
 - All illustration generation is triggered automatically when building documentation
 
+#### LaTeX Reference and Hyperlinking Guidelines
+When creating or modifying LaTeX documents, follow these guidelines to ensure maximum hyperlinking of references:
+
+**Hyperref Configuration:**
+- Use `\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}` to enable visible clickable links
+- Include `\usepackage{url}` to support URL formatting in bibliography
+
+**Citation Practices:**
+- Use `\cite{key}` for proper citation links to bibliography
+- Ensure all citations have corresponding entries in the bibliography file
+- Citations will automatically link to the bibliography section
+
+**Bibliography Entry Guidelines:**
+- **Always include URL fields** for external access to referenced works
+- **Add DOI fields** when available for academic papers (format: `doi={10.xxxx/yyyy}`)
+- **Include Amazon/publisher links** when direct links are unavailable (format: `url={https://amazon.com/...}`)
+- **Add helpful notes** indicating access method (e.g., `note={Available on Amazon}`)
+
+**Required fields for different entry types:**
+- Books: `url` (Amazon/publisher), `note` describing access
+- Papers: `doi` and `url` (to publisher/ArXiv), `howpublished` for preprints
+- Misc/Technical reports: `url` (to source), `howpublished` describing format
+
+**Bibliography formatting:**
+```bibtex
+@book{example2024,
+  title={Example Book Title},
+  author={Author, A.},
+  year={2024},
+  publisher={Publisher Name},
+  url={https://www.amazon.com/product-link},
+  note={Available on Amazon}
+}
+
+@article{example2024paper,
+  title={Example Paper Title},
+  author={Author, A.},
+  journal={Journal Name},
+  year={2024},
+  doi={10.1234/example.doi},
+  url={https://dl.acm.org/doi/10.1234/example.doi}
+}
+```
+
 ## Validation
 
 ### Manual Testing
