@@ -1,0 +1,40 @@
+@startuml coordinate_frames
+title Coordinate Frame Relationships in Hexapod Leg
+
+[World Frame] as World
+[Hip Frame] as Hip
+[Thigh Frame] as Thigh
+[Knee Frame] as Knee
+[Toe Frame] as Toe
+
+World --> Hip : Identity
+Hip --> Thigh : Motor M1 (Hip Yaw)
+Thigh --> Knee : Motor M2 (Thigh Pitch)
+Knee --> Toe : Motor M3 + Translation
+
+note left of World
+World Coordinate System
+X: Forward (robot front)
+Y: Left (robot side)
+Z: Up (robot vertical)
+end note
+
+note right of Hip
+Hip-centric coordinates
+θ1: Yaw rotation about Z
+Range: typically ±45°
+end note
+
+note right of Thigh
+Thigh joint coordinates
+θ2: Pitch rotation about Y
+Forward/backward leg swing
+end note
+
+note right of Knee
+Knee joint coordinates
+θ3: Pitch rotation about Y
+Leg extension/flexion
+end note
+
+@enduml
