@@ -16,7 +16,11 @@ go.work
 
 # Example binaries
 examples/*/hexapod_leg
-examples/*/*.exe
+examples/*/*
+
+# Coverage reports
+coverage.html
+coverage.out
 
 # LaTeX build artifacts
 docs/*.aux
@@ -32,3 +36,18 @@ docs/*.synctex.gz
 # Coverage reports
 coverage.out
 coverage.html
+
+
+# macOS
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+/tmp/
+
