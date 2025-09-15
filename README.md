@@ -1,6 +1,6 @@
 # goik-ga
 
-A minimal Go code package that refactors hexapod-style kinematics into **geometric algebra** (GA) primitives.
+A minimal Go code package that refactors hexapod-style kinematics into **geometric algebra** (GA) primitives.  This is strongly inspired by and in essence a re-implementation of the work of Hans Jørgen Grimstad in [goik](https://github.com/hansj66/goik/tree/main/goik).
 
 - **pga/**: Practical rigid-motion GA using **motors** implemented as **dual quaternions** (equivalent to PGA motors for SE(3) actions). This gives you compact FK/IK building blocks without frame-juggling.
 - **cga/**: Parallel **Conformal Geometric Algebra** (CGA) *API sketch* with detailed notes and placeholders. Useful when you need circles/spheres/distances natively. (Full implementation is non-trivial; stubs provided to illustrate the parallel interface.)
