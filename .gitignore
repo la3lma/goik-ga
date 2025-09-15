@@ -29,6 +29,14 @@ docs/*.blg
 docs/*.log
 docs/*.out
 docs/*.toc
+docs/*.fdb_latexmk
+docs/*.fls
+docs/*.synctex.gz
+
+# Coverage reports
+coverage.out
+coverage.html
+
 
 # macOS
 .DS_Store
@@ -42,3 +50,4 @@ docs/*.toc
 
 # Temporary files
 /tmp/
+

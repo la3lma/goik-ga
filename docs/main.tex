@@ -11,19 +11,21 @@
 \begin{document}
 \maketitle
 
+\noindent\textbf{Acknowledgment:} This work is strongly inspired by and builds upon the excellent foundation provided by Hans Jørgen Grimstad's \texttt{goik} package~\footnote{\url{https://github.com/hansj66/goik/tree/main/goik}}, which pioneered practical hexapod kinematics implementations in Go.
+
 \section{Why Geometric Algebra (GA)?}
 Hexapod math based on per-joint rotation matrices and translations quickly accumulates frame bookkeeping.
-\emph{Projective Geometric Algebra} (PGA) and \emph{Conformal Geometric Algebra} (CGA) provide unified representations (motors/rotors) that act by a single sandwich product, reducing complexity and improving robustness.
+\emph{Projective Geometric Algebra} (PGA) and \emph{Conformal Geometric Algebra} (CGA)~\cite{dorst2009gacs} provide unified representations (motors/rotors) that act by a single sandwich product, reducing complexity and improving robustness.
 
 \paragraph{PGA for SE(3).}
-Rigid motions (rotations + translations) are represented by \emph{motors}, which you can view as the geometric-algebraic analog of dual quaternions. Composition is associative; points are updated via $X' = M X \tilde{M}$.
+Rigid motions (rotations + translations) are represented by \emph{motors}~\cite{gunn2011pga}, which you can view as the geometric-algebraic analog of dual quaternions. Composition is associative; points are updated via $X' = M X \tilde{M}$.
 
 \paragraph{CGA for incidence/distance.}
-CGA encodes points as null vectors and treats planes, lines, circles, and spheres as native objects. Translations are rotors in CGA, and meet/join operations give concise formulas for projections, distances, and constraints.
+CGA encodes points as null vectors and treats planes, lines, circles, and spheres as native objects~\cite{dorst2009gacs}. Translations are rotors in CGA, and meet/join operations give concise formulas for projections, distances, and constraints.
 
 \section{Representations}
 \subsection{PGA (practical)}
-We implement motors as dual quaternions $(r + \varepsilon d)$ with unit $r$.
+We implement motors as dual quaternions $(r + \varepsilon d)$ with unit $r$~\cite{kavan2008dq}.
 Given axis-angle $(\mathbf{\hat{u}}, \theta)$ and translation $\mathbf{t}$:
 \[
 r = \cos \tfrac{\theta}{2} + \sin \tfrac{\theta}{2} \, (\hat{u}_x \mathbf{i} + \hat{u}_y \mathbf{j} + \hat{u}_z \mathbf{k}),\quad
@@ -37,7 +39,7 @@ A point $\mathbf{p}$ transforms as
 This matches PGA motor action for SE(3).
 
 \subsection{CGA (parallel sketch)}
-CGA lifts $\mathbb{R}^3$ into a 5D space with two null directions $e_0, e_\infty$.
+CGA lifts $\mathbb{R}^3$ into a 5D space with two null directions $e_0, e_\infty$~\cite{dorst2009gacs}.
 Points, planes, spheres, and circles become algebraic blades. Rotors (including translations) act by $X' = R X \tilde{R}$.
 We provide an API mirroring the PGA motor API; the current code routes to the PGA backend so you can wire usage now and swap later.
 
@@ -64,7 +66,7 @@ Replace sequences of rotation matrices + translations with motors.
 Precompute static offsets as motors. FK becomes a product; IK uses either the analytic triangle plus axis-angle recovery or a Jacobian solver.
 
 \section{Complexity and Robustness}
-GA reduces trig and frame conversions, unifies operations, and offers a clear path to autodiff and MPC. Dual-quaternion motors are numerically stable and cheap to normalize.
+GA reduces trig and frame conversions, unifies operations, and offers a clear path to autodiff and MPC~\cite{lasenby2024ga}. Dual-quaternion motors are numerically stable and cheap to normalize.
 
 \bibliographystyle{ieeetr}
 \bibliography{refs}
